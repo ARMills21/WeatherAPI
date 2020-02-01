@@ -28,7 +28,7 @@
 
   function searchCityWeather(city) {
 
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city  + ",us&APPID=435ab649b0112c3f0f4aabcb2c0ae404"; 
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city  + ",us&units=imperial&APPID=435ab649b0112c3f0f4aabcb2c0ae404"; 
 
       console.log(encodeURI(queryURL));
 
@@ -43,16 +43,17 @@
       var imageURL = "http://openweathermap.org/img/wn/" + response.weather["0"].icon + "@2x.png";
 
       console.log(imageURL)
-      
+      var d = $("<h2>").text(new Date());
       var cityName = $("<h1>").text(response.name);
       var weatherImage = $("<img>").attr("src", imageURL);
-      var cityTemp = $("<h2>").text(response.main.temp);
-      var cityHumidity = $("<h2>").text(response.main.humidity);
-      var cityWind = $("<h2>").text(response.wind.speed);
+      var weatherCurrent = $("<h2>").text('Weather: ' + response.weather["0"].main);
+      var cityTemp = $("<h2>").text('Temperature: ' + response.main.temp + ' degrees');
+      var cityHumidity = $("<h2>").text('Humidity: ' + response.main.humidity + '%');
+      var cityWind = $("<h2>").text('Wind: ' + response.wind.speed + ' mph');
       var cityTime = $("<h2>").text(response.timezone);
 
       $("#city-div").empty();
-      $("#city-div").append(cityName, weatherImage, cityTemp, cityHumidity, cityWind, cityTime);
+      $("#city-div").append(cityName, d, weatherImage, weatherCurrent, cityTemp, cityHumidity, cityWind, cityTime);
     });
   }
    
