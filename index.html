@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>What's the Weather?</title>
+</head>
+
+<body>
+
+  <form id="weather-form">
+
+    <label for="city-input">Choose Your City</label>
+
+    <input type="text" id="city-input"><br>
+
+    <input id="select-city" type="submit" value="GO!">
+    
+  </form>
+
+  <div id="city-div"></div>
+ 
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  function searchCityWeather(city) {
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city  + ",us&APPID=435ab649b0112c3f0f4aabcb2c0ae404"; //50b1751fb0bbf7a9f209123c6c9e4347
+        console.log(queryURL);
+    $.ajax({
+      url: encodeURI(queryURL),
+      method: "GET"
+    }).then(function(response) {
+
+      // Printing the entire object to console
+      console.log(response);
+      console.log(queryURL);
+
+      // Constructing HTML containing the artist information
+  //     var artistName = $("<h1>").text(response.name);
+  //     var artistURL = $("<a>").attr("href", response.url).append(artistName);
+  //     var artistImage = $("<img>").attr("src", response.thumb_url);
+  //     var trackerCount = $("<h2>").text(response.tracker_count + " fans tracking this artist");
+  //     var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
+  //     var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
+
+  //     // Empty the contents of the artist-div, append the new artist content
+  //     $("#city-div").empty();
+  //     $("#city-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
+  //   });
+  // }
+    })};
+
+  // Event handler for user clicking the select-artist button
+  $("#select-city").on("click", function(event) {
+    // Preventing the button from trying to submit the form
+    event.preventDefault();
+    // Storing the artist name
+    var inputCity = $("#city-input").val().trim();
+
+    // Running the searchBandsInTown function(passing in the artist as an argument)
+    searchCityWeather(inputCity);
+  });
+</script>
+
+</html>
