@@ -23,42 +23,44 @@
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script>
+
   function searchCityWeather(city) {
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city  + ",us&APPID=435ab649b0112c3f0f4aabcb2c0ae404"; //50b1751fb0bbf7a9f209123c6c9e4347
-        console.log(queryURL);
+
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city  + ",us&APPID=435ab649b0112c3f0f4aabcb2c0ae404"; 
+
+      console.log(encodeURI(queryURL));
+
     $.ajax({
       url: encodeURI(queryURL),
       method: "GET"
     }).then(function(response) {
 
-      // Printing the entire object to console
       console.log(response);
-      console.log(queryURL);
 
-      // Constructing HTML containing the artist information
-  //     var artistName = $("<h1>").text(response.name);
-  //     var artistURL = $("<a>").attr("href", response.url).append(artistName);
-  //     var artistImage = $("<img>").attr("src", response.thumb_url);
-  //     var trackerCount = $("<h2>").text(response.tracker_count + " fans tracking this artist");
-  //     var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
-  //     var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
 
-  //     // Empty the contents of the artist-div, append the new artist content
-  //     $("#city-div").empty();
-  //     $("#city-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
-  //   });
-  // }
-    })};
+      var imageURL = "http://openweathermap.org/img/wn/" + response.weather["0"].icon + "@2x.png";
 
-  // Event handler for user clicking the select-artist button
+      console.log(imageURL)
+      
+      var cityName = $("<h1>").text(response.name);
+      var weatherImage = $("<img>").attr("src", imageURL);
+      var cityTemp = $("<h2>").text(response.main.temp);
+      var cityHumidity = $("<h2>").text(response.main.humidity);
+      var cityWind = $("<h2>").text(response.wind.speed);
+      var cityTime = $("<h2>").text(response.timezone);
+
+      $("#city-div").empty();
+      $("#city-div").append(cityName, weatherImage, cityTemp, cityHumidity, cityWind, cityTime);
+    });
+  }
+   
+
   $("#select-city").on("click", function(event) {
-    // Preventing the button from trying to submit the form
     event.preventDefault();
-    // Storing the artist name
     var inputCity = $("#city-input").val().trim();
 
-    // Running the searchBandsInTown function(passing in the artist as an argument)
     searchCityWeather(inputCity);
   });
 </script>
