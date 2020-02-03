@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>What's the Weather?</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -17,7 +18,7 @@
     <input id="select-city" type="submit" value="GO!">
     
   </form>
-
+  <div id='citySearch'></div>
   <div id="city-div"></div>
  
 </body>
@@ -45,18 +46,19 @@
       console.log(imageURL)
       var d = $("<h2>").text(new Date());
       var cityName = $("<h1>").text(response.name);
+      var cityName1 = $("<h1>").text(response.name);
       var weatherImage = $("<img>").attr("src", imageURL);
       var weatherCurrent = $("<h2>").text('Weather: ' + response.weather["0"].main);
       var cityTemp = $("<h2>").text('Temperature: ' + response.main.temp + ' degrees');
       var cityHumidity = $("<h2>").text('Humidity: ' + response.main.humidity + '%');
       var cityWind = $("<h2>").text('Wind: ' + response.wind.speed + ' mph');
-      var cityTime = $("<h2>").text(response.timezone);
 
       $("#city-div").empty();
-      $("#city-div").append(cityName, d, weatherImage, weatherCurrent, cityTemp, cityHumidity, cityWind, cityTime);
-    });
-  }
-   
+      $("#city-div").append(cityName, d, weatherImage, weatherCurrent, cityTemp, cityHumidity, cityWind);
+      $("#citySearch").empty();
+      $("#citySearch").append(cityName1);
+      })
+  };
 
   $("#select-city").on("click", function(event) {
     event.preventDefault();
@@ -64,6 +66,16 @@
 
     searchCityWeather(inputCity);
   });
+
+  //     var citiesSearched = []{
+  // function storeSearch() {
+  //   $("#citySeach").empty();
+
+        
+  // storeSearch(citiesSearched);
+
+// }});
 </script>
 
 </html>
+  

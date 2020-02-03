@@ -1,0 +1,29 @@
+#city-div{
+    display: block;
+    margin: auto;
+    width: 50%;
+    border: solid black;
+    background-color: steelblue;
+    color: white;
+    padding: 10px;
+}
+
+#citySearch{
+    font-size: medium;
+    float: left;
+    display: block;
+    margin: auto;
+    border: solid black;
+    background-color: steelblue;
+    color: white;
+    width: 20%;
+    padding-top: 10px;
+}
+
+#weather-form{
+    padding-bottom: 10px;
+}
+
+body{
+    background-color: rgba(231, 253, 255, 0.534);
+}
